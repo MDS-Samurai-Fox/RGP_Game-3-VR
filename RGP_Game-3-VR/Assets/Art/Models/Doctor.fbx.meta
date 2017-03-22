@@ -1,0 +1,259 @@
+fileFormatVersion: 2
+guid: 836b206133f18224aab5227b82bf994f
+timeCreated: 1477541783
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Doctor
+    100002: //RootNode
+    100004: head
+    100006: joint7
+    100008: L_ankle
+    100010: l_clavicle
+    100012: l_elbow
+    100014: l_fingelJoint
+    100016: l_fingelTip
+    100018: L_knee
+    100020: l_knuckle
+    100022: l_shouldel1
+    100024: L_thigh
+    100026: l_thumbJoint1
+    100028: l_thumbKnuckle
+    100030: l_thumbTip
+    100032: L_toes
+    100034: L_toeTIP
+    100036: l_wlist
+    100038: neck
+    100040: pelvis
+    100042: R_ankle
+    100044: r_cravicre
+    100046: r_erbow
+    100048: r_fingerJoint
+    100050: r_fingerTip
+    100052: R_knee
+    100054: r_knuckre
+    100056: r_shourder1
+    100058: R_thigh
+    100060: r_thumbJoint1
+    100062: r_thumbKnuckre
+    100064: r_thumbTip
+    100066: R_toes
+    100068: R_toeTIP
+    100070: r_wrist
+    100072: spine1
+    100074: spine2
+    100076: spine3
+    400000: Doctor
+    400002: //RootNode
+    400004: head
+    400006: joint7
+    400008: L_ankle
+    400010: l_clavicle
+    400012: l_elbow
+    400014: l_fingelJoint
+    400016: l_fingelTip
+    400018: L_knee
+    400020: l_knuckle
+    400022: l_shouldel1
+    400024: L_thigh
+    400026: l_thumbJoint1
+    400028: l_thumbKnuckle
+    400030: l_thumbTip
+    400032: L_toes
+    400034: L_toeTIP
+    400036: l_wlist
+    400038: neck
+    400040: pelvis
+    400042: R_ankle
+    400044: r_cravicre
+    400046: r_erbow
+    400048: r_fingerJoint
+    400050: r_fingerTip
+    400052: R_knee
+    400054: r_knuckre
+    400056: r_shourder1
+    400058: R_thigh
+    400060: r_thumbJoint1
+    400062: r_thumbKnuckre
+    400064: r_thumbTip
+    400066: R_toes
+    400068: R_toeTIP
+    400070: r_wrist
+    400072: spine1
+    400074: spine2
+    400076: spine3
+    4300000: Doctor
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Doctor
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Doctor
+        weight: 1
+      - path: pelvis
+        weight: 1
+      - path: pelvis/L_thigh
+        weight: 1
+      - path: pelvis/L_thigh/L_knee
+        weight: 1
+      - path: pelvis/L_thigh/L_knee/L_ankle
+        weight: 1
+      - path: pelvis/L_thigh/L_knee/L_ankle/L_toes
+        weight: 1
+      - path: pelvis/L_thigh/L_knee/L_ankle/L_toes/L_toeTIP
+        weight: 1
+      - path: pelvis/R_thigh
+        weight: 1
+      - path: pelvis/R_thigh/R_knee
+        weight: 1
+      - path: pelvis/R_thigh/R_knee/R_ankle
+        weight: 1
+      - path: pelvis/R_thigh/R_knee/R_ankle/R_toes
+        weight: 1
+      - path: pelvis/R_thigh/R_knee/R_ankle/R_toes/R_toeTIP
+        weight: 1
+      - path: pelvis/spine1
+        weight: 1
+      - path: pelvis/spine1/spine2
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1/l_elbow
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1/l_elbow/l_wlist
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1/l_elbow/l_wlist/l_knuckle
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1/l_elbow/l_wlist/l_knuckle/l_fingelJoint
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1/l_elbow/l_wlist/l_knuckle/l_fingelJoint/l_fingelTip
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1/l_elbow/l_wlist/l_thumbKnuckle
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1/l_elbow/l_wlist/l_thumbKnuckle/l_thumbJoint1
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/l_clavicle/l_shouldel1/l_elbow/l_wlist/l_thumbKnuckle/l_thumbJoint1/l_thumbTip
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/neck
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/neck/head
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/neck/head/joint7
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1/r_erbow
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1/r_erbow/r_wrist
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1/r_erbow/r_wrist/r_knuckre
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1/r_erbow/r_wrist/r_knuckre/r_fingerJoint
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1/r_erbow/r_wrist/r_knuckre/r_fingerJoint/r_fingerTip
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1/r_erbow/r_wrist/r_thumbKnuckre
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1/r_erbow/r_wrist/r_thumbKnuckre/r_thumbJoint1
+        weight: 1
+      - path: pelvis/spine1/spine2/spine3/r_cravicre/r_shourder1/r_erbow/r_wrist/r_thumbKnuckre/r_thumbJoint1/r_thumbTip
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1.2
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
