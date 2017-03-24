@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 063e8744f56f0b24ab60f19ec278bb83
-timeCreated: 1477463083
+guid: aa138371ce6834e09af15b6b2c73887b
+timeCreated: 1490231423
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -10,7 +10,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Roboto
+  - League Spartan
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
