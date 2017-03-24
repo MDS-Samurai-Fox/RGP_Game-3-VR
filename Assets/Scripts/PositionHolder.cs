@@ -2,14 +2,17 @@
 using UnityEngine;
 
 public class PositionHolder : MonoBehaviour {
-
+    
+    // The main canvases that provide interaction with the game
     private CanvasGroup moaInteractionCG, modelViewCG, screenViewCG;
-
+    
+    // The positions of the element to store at
     public Vector3 originalPosition, middlePosition, tweenPosition;
-
+    
+    // The original rotation of the element, stored via script
     private Vector3 originalRotation;
 
-    // Animation
+    // Animation variables
     public Ease easeType = Ease.OutSine;
     public float tweenDuration = 1f;
     private Vector3[] originalPath, tweenPath;
@@ -33,9 +36,9 @@ public class PositionHolder : MonoBehaviour {
 
         originalRotation = transform.eulerAngles;
 
-        transform.DOMove(originalPosition, 0);
-        modelViewCG.alpha = 0;
-        modelViewCG.blocksRaycasts = false;
+        // transform.DOMove(originalPosition, 0);
+        // modelViewCG.alpha = 0;
+        // modelViewCG.blocksRaycasts = false;
 
         originalPath = new Vector3[] {
             middlePosition,
@@ -48,7 +51,10 @@ public class PositionHolder : MonoBehaviour {
         };
 
     }
-
+    
+    /// <summary>
+    /// Toggles the change between positions, called from whithin the buttons
+    /// </summary>
     public void ChangePositions() {
 
         // Change to the tween position
@@ -66,6 +72,9 @@ public class PositionHolder : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Bring this transform in front of the player and hide the other canvases
+    /// </summary>
     void ZoomIn() {
 
         // Change the size of the model view canvas to fit the scale of the object
@@ -86,6 +95,9 @@ public class PositionHolder : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// Bring this transform to its original position and hide the edit canvas of it
+    /// </summary>
     void ZoomOut() {
 
         // Reset the rotation back to normal

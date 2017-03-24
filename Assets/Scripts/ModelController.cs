@@ -4,8 +4,8 @@ using DG.Tweening;
 using UnityEngine;
 
 public class ModelController : MonoBehaviour {
-
-    public Transform pivot;
+	
+	public Ease easeType = Ease.OutBounce;
 	public float rotationDuration = 1;
 	private bool canRotate = true;
 
@@ -25,7 +25,7 @@ public class ModelController : MonoBehaviour {
 			eulerAngles.y += 90;
 		}
 		
-		transform.DORotate(eulerAngles, 1.5f).SetEase(Ease.OutBack).OnComplete(ResetRotationState);
+		transform.DORotate(eulerAngles, rotationDuration).SetEase(easeType).OnComplete(ResetRotationState);
 
     }
 	

@@ -51,7 +51,7 @@ Material:
       second: 10
     - first:
         name: _InvFade
-      second: 1
+      second: 3
     - first:
         name: _Parallax
       second: 0.5
