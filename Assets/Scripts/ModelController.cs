@@ -7,10 +7,17 @@ public class ModelController : MonoBehaviour {
 
     public Transform pivot;
 	public float rotationDuration = 1;
+	private bool canRotate = true;
 
     public void RotateTo(bool shouldRotateRight) {
 		
-		Vector3 eulerAngles = this.transform.transform.eulerAngles;
+		if (!canRotate) {
+			return;
+		} else {
+			canRotate = false;
+		}
+		
+		Vector3 eulerAngles = transform.transform.eulerAngles;
 		
 		if (shouldRotateRight) {
 			eulerAngles.y -= 90;
@@ -18,8 +25,18 @@ public class ModelController : MonoBehaviour {
 			eulerAngles.y += 90;
 		}
 		
-		this.transform.DORotate(eulerAngles, 0.4f);
+		transform.DORotate(eulerAngles, 1.5f).SetEase(Ease.OutBack).OnComplete(ResetRotationState);
 
     }
+	
+	public void RotateTo(Vector3 _eulerAngles) {
+		
+		transform.DORotate(_eulerAngles, 1f);
+		
+	}
+	
+	void ResetRotationState() {
+		canRotate = true;
+	}
 
 }

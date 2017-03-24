@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: GazePointer
-  m_Shader: {fileID: 4800000, guid: ab4c33521088d3a45adde39773a4d8d5, type: 3}
+  m_Shader: {fileID: 4800000, guid: b95caf64e2cc3614892026a94bb2be84, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 3010
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,6 +19,12 @@ Material:
         name: _AlphaTex
       second:
         m_Texture: {fileID: 2800000, guid: 8b000a1e9077a124f9ad4e81392fccba, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _ColorRamp
+      second:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -38,6 +44,9 @@ Material:
         name: _AlphaCutoff
       second: 0
     - first:
+        name: _ColorRampOffset
+      second: 0
+    - first:
         name: _EmissionLM
       second: 0
     - first:
@@ -55,7 +64,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0, g: 1, b: 0.006896496, a: 1}
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _TintColor
       second: {r: 1, g: 1, b: 1, a: 1}
