@@ -1,7 +1,11 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PositionHolder : MonoBehaviour {
+    
+    // The game manager
+    private GameManager gm;
     
     // The main canvases that provide interaction with the game
     private CanvasGroup moaInteractionCG, modelViewCG, screenViewCG;
@@ -26,6 +30,7 @@ public class PositionHolder : MonoBehaviour {
         moaInteractionCG = GameObject.Find("Moa Interaction Canvas").GetComponent<CanvasGroup>();
         modelViewCG = GameObject.Find("Model View Canvas").GetComponent<CanvasGroup>();
         screenViewCG = GameObject.Find("Screen View Canvas").GetComponent<CanvasGroup>();
+        gm = FindObjectOfType<GameManager>();
     }
 
     /// <summary>
@@ -36,9 +41,7 @@ public class PositionHolder : MonoBehaviour {
 
         originalRotation = transform.eulerAngles;
 
-        // transform.DOMove(originalPosition, 0);
-        // modelViewCG.alpha = 0;
-        // modelViewCG.blocksRaycasts = false;
+        transform.DOMove(originalPosition, 0);
 
         originalPath = new Vector3[] {
             middlePosition,
@@ -76,7 +79,9 @@ public class PositionHolder : MonoBehaviour {
     /// Bring this transform in front of the player and hide the other canvases
     /// </summary>
     void ZoomIn() {
-
+        
+        gm.PlaySound(gm.zoom_in);
+        
         // Change the size of the model view canvas to fit the scale of the object
         modelViewRT = modelViewCG.GetComponent<RectTransform>();
         modelViewRT.sizeDelta = new Vector2(transform.localScale.x, transform.localScale.y) * 1000;
@@ -99,6 +104,8 @@ public class PositionHolder : MonoBehaviour {
     /// Bring this transform to its original position and hide the edit canvas of it
     /// </summary>
     void ZoomOut() {
+        
+        gm.PlaySound(gm.zoom_out);
 
         // Reset the rotation back to normal
         transform.GetComponent<ModelController>().RotateTo(originalRotation);
