@@ -2,26 +2,27 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PositionHolder : MonoBehaviour {
-    
-    // The game manager
+public class ZoomManager : MonoBehaviour {
+
     private GameManager gm;
+    [HideInInspector] public ModelController mc;
     
+
     // The main canvases that provide interaction with the game
     private CanvasGroup moaInteractionCG, modelViewCG, screenViewCG;
-    
+
     // The positions of the element to store at
-    public Vector3 originalPosition, middlePosition, tweenPosition;
+    public Vector3 originalPosition, middlePosition, finalPosition;
     
-    // The original rotation of the element, stored via script
-    private Vector3 originalRotation;
 
     // Animation variables
-    public Ease easeType = Ease.OutSine;
+    public Ease ZoomEaseType = Ease.OutSine;
     public float tweenDuration = 1f;
     private Vector3[] originalPath, tweenPath;
     private float fadeDuration = 0.3f;
     private RectTransform objectRT, modelViewRT;
+
+    // ------------------------------------------------------------------------
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -31,6 +32,7 @@ public class PositionHolder : MonoBehaviour {
         modelViewCG = GameObject.Find("Model View Canvas").GetComponent<CanvasGroup>();
         screenViewCG = GameObject.Find("Screen View Canvas").GetComponent<CanvasGroup>();
         gm = FindObjectOfType<GameManager>();
+        mc = GetComponent<ModelController>();
     }
 
     /// <summary>
@@ -38,8 +40,6 @@ public class PositionHolder : MonoBehaviour {
     /// any of the Update methods is called the first time.
     /// </summary>
     void Start() {
-
-        originalRotation = transform.eulerAngles;
 
         transform.DOMove(originalPosition, 0);
 
@@ -50,11 +50,11 @@ public class PositionHolder : MonoBehaviour {
 
         tweenPath = new Vector3[] {
             middlePosition,
-            tweenPosition
+            finalPosition
         };
 
     }
-    
+
     /// <summary>
     /// Toggles the change between positions, called from whithin the buttons
     /// </summary>
@@ -74,29 +74,38 @@ public class PositionHolder : MonoBehaviour {
         }
 
     }
+    
+    /// <summary>
+    /// Resets the position of the object, useful 
+    /// </summary>
+    public void ResetPosition() {
+        if (transform.position != originalPosition) {
+            transform.DOMove(originalPosition, 0);
+        }
+    }
 
     /// <summary>
     /// Bring this transform in front of the player and hide the other canvases
     /// </summary>
     void ZoomIn() {
-        
+
         gm.PlaySound(gm.zoom_in);
-        
+
         // Change the size of the model view canvas to fit the scale of the object
         modelViewRT = modelViewCG.GetComponent<RectTransform>();
         modelViewRT.sizeDelta = new Vector2(transform.localScale.x, transform.localScale.y) * 1000;
-        modelViewRT.DOAnchorPosY(tweenPosition.y, fadeDuration - 0.2f);
+        modelViewRT.DOAnchorPosY(finalPosition.y, fadeDuration - 0.2f);
 
         modelViewCG.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration * 2);
         modelViewCG.blocksRaycasts = true;
-        
+
         moaInteractionCG.DOFade(0, fadeDuration);
         moaInteractionCG.blocksRaycasts = false;
-        
+
         screenViewCG.DOFade(0, fadeDuration);
         screenViewCG.blocksRaycasts = false;
 
-        transform.DOPath(tweenPath, tweenDuration, PathType.CatmullRom, PathMode.Full3D, 5).SetEase(easeType);
+        transform.DOPath(tweenPath, tweenDuration, PathType.CatmullRom, PathMode.Full3D, 5).SetEase(ZoomEaseType);
 
     }
 
@@ -104,22 +113,22 @@ public class PositionHolder : MonoBehaviour {
     /// Bring this transform to its original position and hide the edit canvas of it
     /// </summary>
     void ZoomOut() {
-        
+
         gm.PlaySound(gm.zoom_out);
 
         // Reset the rotation back to normal
-        transform.GetComponent<ModelController>().RotateTo(originalRotation);
+        transform.GetComponent<ModelController>().RotateTo(mc.originalRotation);
 
         moaInteractionCG.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration * 2);
         moaInteractionCG.blocksRaycasts = true;
-        
+
         screenViewCG.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration * 2);
         screenViewCG.blocksRaycasts = true;
-        
+
         modelViewCG.DOFade(0, fadeDuration);
         modelViewCG.blocksRaycasts = false;
 
-        transform.DOPath(originalPath, tweenDuration, PathType.CatmullRom, PathMode.Full3D, 5).SetEase(easeType);
+        transform.DOPath(originalPath, tweenDuration, PathType.CatmullRom, PathMode.Full3D, 5).SetEase(ZoomEaseType);
 
     }
 

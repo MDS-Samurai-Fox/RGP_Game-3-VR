@@ -6,10 +6,15 @@ using UnityEngine;
 public class ModelController : MonoBehaviour {
 
     private GameManager gm;
-
-    public Ease easeType = Ease.OutBounce;
+    
+    
+    // Rotation
+    [HideInInspector] public Vector3 originalRotation;
+    public Ease rotationEaseType = Ease.OutBounce;
     public float rotationDuration = 1;
     private bool canRotate = true;
+
+    // ------------------------------------------------------------------------
 
     /// <summary>
     /// Awake is called when the script instance is being loaded.
@@ -18,7 +23,18 @@ public class ModelController : MonoBehaviour {
         gm = FindObjectOfType<GameManager>();
     }
 
-    // Called from a button
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
+    void Start() {
+        originalRotation = transform.eulerAngles;
+    }
+
+    /// <summary>
+    /// Rotates the object 90 degrees horizontally 
+    /// </summary>
+    /// <param name="shouldRotateRight"> Whether or not the object should rotate to the right </param>
     public void RotateTo(bool shouldRotateRight) {
 
         if (!canRotate) {
@@ -30,25 +46,29 @@ public class ModelController : MonoBehaviour {
         Vector3 eulerAngles = transform.transform.eulerAngles;
 
         if (shouldRotateRight) {
-			gm.PlaySound(gm.arrow_right);
+            gm.PlaySound(gm.arrow_right);
             eulerAngles.y -= 90;
         } else {
-			gm.PlaySound(gm.arrow_left);
+            gm.PlaySound(gm.arrow_left);
             eulerAngles.y += 90;
         }
 
-        transform.DORotate(eulerAngles, rotationDuration).SetEase(easeType).OnComplete(ResetRotationState);
+        transform.DORotate(eulerAngles, rotationDuration).SetEase(rotationEaseType).OnComplete(ResetRotationState);
 
     }
-
+    
     public void RotateTo(Vector3 _eulerAngles) {
 
         transform.DORotate(_eulerAngles, 1f);
 
     }
 
-    void ResetRotationState() {
+    public void ResetRotationState() {
         canRotate = true;
+    }
+
+    public void ResetRotation() {
+        transform.DORotate(originalRotation, 0);
     }
 
 }
