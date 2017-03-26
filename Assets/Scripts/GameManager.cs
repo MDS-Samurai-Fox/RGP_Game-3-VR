@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour {
             cgList[i].blocksRaycasts = false;
         }
 
-        cgList[0].DOFade(1, 1);
+        // cgList[0].DOFade(1, 1);
+        cgList[0].alpha = 1;
         cgList[0].blocksRaycasts = true;
 
     }
@@ -81,14 +82,17 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     IEnumerator EnableGameplay() {
-
-        cgList[0].DOFade(0, 1);
+        
+        cgList[0].alpha = 0;
         cgList[0].blocksRaycasts = false;
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.5f);
+        
         cgList[1].DOFade(1, 1);
-        cgList[1].blocksRaycasts = true;
         cgList[2].DOFade(1, 1);
+        
+        yield return new WaitForSeconds(0.9f);
+        cgList[1].blocksRaycasts = true;
         cgList[2].blocksRaycasts = true;
 
     }

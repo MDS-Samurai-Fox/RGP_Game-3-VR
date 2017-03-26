@@ -601,7 +601,7 @@ public class OVRManager : MonoBehaviour
 		if (OVRPlugin.shouldQuit)
 			Application.Quit();
 
-		if (OVRPlugin.shouldRecenter)
+		if (OVRPlugin.shouldRecenter || (Input.GetKeyDown(KeyCode.Escape)))
 			OVRManager.display.RecenterPose();
 
 		if (trackingOriginType != _trackingOriginType)
