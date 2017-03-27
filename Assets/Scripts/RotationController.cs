@@ -3,7 +3,7 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
-public class ModelController : MonoBehaviour {
+public class RotationController : MonoBehaviour {
 
     private GameManager gm;
     

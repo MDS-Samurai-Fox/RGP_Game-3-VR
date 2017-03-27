@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
+    [HeaderAttribute("Text")]
+    public TextMeshProUGUI textLeft;
+    public TextMeshProUGUI textRight;
+    
+    
     [HeaderAttribute("Canvases")]
     public CanvasGroup intro;
-    public CanvasGroup moa;
+    public CanvasGroup moaCanvas;
     public CanvasGroup modelViewCanvas;
     public CanvasGroup screenViewCanvas;
 
@@ -32,7 +38,7 @@ public class GameManager : MonoBehaviour {
     void Start() {
 
         cgList.Add(intro);
-        cgList.Add(moa);
+        cgList.Add(moaCanvas);
         cgList.Add(screenViewCanvas);
         cgList.Add(modelViewCanvas);
 
@@ -106,8 +112,8 @@ public class GameManager : MonoBehaviour {
         ZoomManager[] phList = FindObjectsOfType<ZoomManager>();
         
         // Reset the moa
-        print(moa.transform.parent);
-        moa.transform.parent.GetComponent<ModelController>().ResetRotation();
+        print(moaCanvas.transform.parent);
+        moaCanvas.transform.parent.GetComponent<RotationController>().ResetRotation();
         
         // Reset the body parts
         foreach(ZoomManager ph in phList) {

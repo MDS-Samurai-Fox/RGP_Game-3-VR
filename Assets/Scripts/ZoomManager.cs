@@ -1,19 +1,20 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using TMPro;
 
 public class ZoomManager : MonoBehaviour {
 
     private GameManager gm;
-    [HideInInspector] public ModelController mc;
+    [HideInInspector] public RotationController mc;
     
+    // Text Fills
+    private TextMeshProUGUI[] texts;
 
     // The main canvases that provide interaction with the game
-    private CanvasGroup moaInteractionCG, modelViewCG, screenViewCG;
+    // private CanvasGroup moaInteractionCG, modelViewCG, screenViewCG;
 
     // The positions of the element to store at
     public Vector3 originalPosition, middlePosition, finalPosition;
-    
 
     // Animation variables
     public Ease ZoomEaseType = Ease.OutSine;
@@ -28,11 +29,16 @@ public class ZoomManager : MonoBehaviour {
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     void Awake() {
-        moaInteractionCG = GameObject.Find("Moa Interaction Canvas").GetComponent<CanvasGroup>();
-        modelViewCG = GameObject.Find("Model View Canvas").GetComponent<CanvasGroup>();
-        screenViewCG = GameObject.Find("Screen View Canvas").GetComponent<CanvasGroup>();
+        
         gm = FindObjectOfType<GameManager>();
-        mc = GetComponent<ModelController>();
+        
+        // moaInteractionCG = GameObject.Find("Moa Interaction Canvas").GetComponent<CanvasGroup>();
+        // modelViewCG = GameObject.Find("Model View Canvas").GetComponent<CanvasGroup>();
+        // screenViewCG = GameObject.Find("Screen View Canvas").GetComponent<CanvasGroup>();
+        
+        mc = GetComponent<RotationController>();
+        texts = GetComponentsInChildren<TextMeshProUGUI>();
+    
     }
 
     /// <summary>
@@ -92,18 +98,22 @@ public class ZoomManager : MonoBehaviour {
         gm.PlaySound(gm.zoom_in);
 
         // Change the size of the model view canvas to fit the scale of the object
-        modelViewRT = modelViewCG.GetComponent<RectTransform>();
+        modelViewRT = gm.modelViewCanvas.GetComponent<RectTransform>();
         modelViewRT.sizeDelta = new Vector2(transform.localScale.x, transform.localScale.y) * 1000;
         modelViewRT.DOAnchorPosY(finalPosition.y, fadeDuration - 0.2f);
+        
+        // Change the text
+        gm.textLeft.text = texts[0].text;
+        gm.textRight.text = texts[1].text;
 
-        modelViewCG.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration * 2);
-        modelViewCG.blocksRaycasts = true;
+        gm.modelViewCanvas.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration);
+        gm.modelViewCanvas.blocksRaycasts = true;
 
-        moaInteractionCG.DOFade(0, fadeDuration);
-        moaInteractionCG.blocksRaycasts = false;
+        gm.moaCanvas.DOFade(0, fadeDuration);
+        gm.moaCanvas.blocksRaycasts = false;
 
-        screenViewCG.DOFade(0, fadeDuration);
-        screenViewCG.blocksRaycasts = false;
+        gm.screenViewCanvas.DOFade(0, fadeDuration);
+        gm.screenViewCanvas.blocksRaycasts = false;
 
         transform.DOPath(tweenPath, tweenDuration, PathType.CatmullRom, PathMode.Full3D, 5).SetEase(ZoomEaseType);
 
@@ -117,16 +127,16 @@ public class ZoomManager : MonoBehaviour {
         gm.PlaySound(gm.zoom_out);
 
         // Reset the rotation back to normal
-        transform.GetComponent<ModelController>().RotateTo(mc.originalRotation);
+        transform.GetComponent<RotationController>().RotateTo(mc.originalRotation);
 
-        moaInteractionCG.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration * 2);
-        moaInteractionCG.blocksRaycasts = true;
+        gm.moaCanvas.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration * 2);
+        gm.moaCanvas.blocksRaycasts = true;
 
-        screenViewCG.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration * 2);
-        screenViewCG.blocksRaycasts = true;
+        gm.screenViewCanvas.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration * 2);
+        gm.screenViewCanvas.blocksRaycasts = true;
 
-        modelViewCG.DOFade(0, fadeDuration);
-        modelViewCG.blocksRaycasts = false;
+        gm.modelViewCanvas.DOFade(0, fadeDuration);
+        gm.modelViewCanvas.blocksRaycasts = false;
 
         transform.DOPath(originalPath, tweenDuration, PathType.CatmullRom, PathMode.Full3D, 5).SetEase(ZoomEaseType);
 
