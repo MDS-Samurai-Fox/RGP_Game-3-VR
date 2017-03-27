@@ -1,17 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using TMPro;
 
 public class GameManager : MonoBehaviour {
 
     [HeaderAttribute("Text")]
     public TextMeshProUGUI textLeft;
     public TextMeshProUGUI textRight;
-    
-    
+
     [HeaderAttribute("Canvases")]
     public CanvasGroup intro;
     public CanvasGroup moaCanvas;
@@ -27,7 +26,7 @@ public class GameManager : MonoBehaviour {
     public AudioSource musicSource;
     public AudioSource sfxSource;
 
-    private List<CanvasGroup> cgList = new List<CanvasGroup>();
+    private List<CanvasGroup> cgList = new List<CanvasGroup> ();
 
     // ------------------------------------------------------------------------
 
@@ -72,7 +71,7 @@ public class GameManager : MonoBehaviour {
         cgList[0].blocksRaycasts = true;
 
     }
-    
+
     /// <summary>
     /// Start the game again
     /// </summary>
@@ -82,47 +81,46 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(EnableGameplay());
 
     }
-    
+
     /// <summary>
     /// Fades canvases out and etc.
     /// </summary>
     /// <returns></returns>
     IEnumerator EnableGameplay() {
-        
-        cgList[0].alpha = 0;
+
+        cgList[0].DOFade(0, 0.5f);
         cgList[0].blocksRaycasts = false;
 
         yield return new WaitForSeconds(0.5f);
-        
+
         cgList[1].DOFade(1, 1);
         cgList[2].DOFade(1, 1);
-        
-        yield return new WaitForSeconds(0.9f);
+
+        // yield return new WaitForSeconds(0.9f);
         cgList[1].blocksRaycasts = true;
         cgList[2].blocksRaycasts = true;
 
     }
-    
+
     /// <summary>
     /// Resets the game
     /// </summary>
     public void Reset() {
-        
+
         // Find all the existing zoom managers
-        ZoomManager[] phList = FindObjectsOfType<ZoomManager>();
-        
+        ZoomController[] phList = FindObjectsOfType<ZoomController> ();
+
         // Reset the moa
-        print(moaCanvas.transform.parent);
-        moaCanvas.transform.parent.GetComponent<RotationController>().ResetRotation();
-        
+        GameObject.Find("Moa").GetComponent<RotationController> ().ResetRotation();
+
         // Reset the body parts
-        foreach(ZoomManager ph in phList) {
-            ph.mc.ResetRotation();
+        foreach(ZoomController ph in phList) {
+            ph.rotationController.ResetRotation();
             ph.ResetPosition();
         }
-        
+
         OnlyShowTutorialCanvas();
-    
+
     }
 
     public void PlaySound(AudioClip _clip) {

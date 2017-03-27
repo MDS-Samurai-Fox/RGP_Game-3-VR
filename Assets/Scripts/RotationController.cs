@@ -5,9 +5,8 @@ using UnityEngine;
 
 public class RotationController : MonoBehaviour {
 
-    private GameManager gm;
-    
-    
+    [HideInInspector] public GameManager gameManager;
+
     // Rotation
     [HideInInspector] public Vector3 originalRotation;
     public Ease rotationEaseType = Ease.OutBounce;
@@ -20,7 +19,7 @@ public class RotationController : MonoBehaviour {
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     void Awake() {
-        gm = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GameManager> ();
     }
 
     /// <summary>
@@ -46,17 +45,17 @@ public class RotationController : MonoBehaviour {
         Vector3 eulerAngles = transform.transform.eulerAngles;
 
         if (shouldRotateRight) {
-            gm.PlaySound(gm.arrow_right);
+            gameManager.PlaySound(gameManager.arrow_right);
             eulerAngles.y -= 90;
         } else {
-            gm.PlaySound(gm.arrow_left);
+            gameManager.PlaySound(gameManager.arrow_left);
             eulerAngles.y += 90;
         }
 
         transform.DORotate(eulerAngles, rotationDuration).SetEase(rotationEaseType).OnComplete(ResetRotationState);
 
     }
-    
+
     public void RotateTo(Vector3 _eulerAngles) {
 
         transform.DORotate(_eulerAngles, 1f);
