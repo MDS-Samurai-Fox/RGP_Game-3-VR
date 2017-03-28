@@ -91,38 +91,58 @@ public class RotationController : MonoBehaviour {
         CanvasGroup back = moaCanvas.FindChild("Side - Back").GetComponent<CanvasGroup>();
 
         // Fade all the canvases out
-        front.DOFade(0, 0.15f); front.blocksRaycasts = false;
-        left.DOFade(0, 0.15f); left.blocksRaycasts = false;
-        right.DOFade(0, 0.15f); right.blocksRaycasts = false;
-        back.DOFade(0, 0.15f); back.blocksRaycasts = false;
+        float fadeTime = 0.15f;
+        if (!_shouldDelay) 
+            fadeTime = 0;
+        
+        front.DOFade(0, fadeTime); front.blocksRaycasts = false;
+        left.DOFade(0, fadeTime); left.blocksRaycasts = false;
+        right.DOFade(0, fadeTime); right.blocksRaycasts = false;
+        back.DOFade(0, fadeTime); back.blocksRaycasts = false;
+        
+        StartCoroutine(FadeCanvases(rotationDuration - 1, front, left, right, back));
+
+    }
+    
+    IEnumerator FadeCanvases(float _waitTime, CanvasGroup front, CanvasGroup left, CanvasGroup right, CanvasGroup back) {
+        
+        print("-- Fading the canvases in " + _waitTime);
+        
+        yield return new WaitForSeconds(_waitTime);
+        
+        float fadeTime = 0.5f;
         
         // Depending on the angle, fade the current side in
         // Front
         if (endAngle == 0 || endAngle == 360) {
-            front.DOFade(1, 0.15f);
-            if (_shouldDelay) {
-                // front.DOFade(1, 0.25f).SetDelay(0.1f);
-            } else {
-            }
+            print("-- Front");
+            front.DOFade(1, fadeTime);
+            yield return new WaitForSeconds(fadeTime);
             front.blocksRaycasts = true;
         }
         // Right
         else if (endAngle == 90) {
-            right.DOFade(1, 0.5f).SetDelay(rotationDuration);
+            print("-- Right");
+            right.DOFade(1, fadeTime);
+            yield return new WaitForSeconds(fadeTime);
             right.blocksRaycasts = true;
             
         }
         // Left
         else if (endAngle == -90) {
-            left.DOFade(1, 0.5f).SetDelay(rotationDuration);
+            print("-- Left");
+            left.DOFade(1, fadeTime);
+            yield return new WaitForSeconds(fadeTime);
             left.blocksRaycasts = true;
         }
         // Back
         else if (endAngle == 180) {
-            back.DOFade(1, 0.5f).SetDelay(rotationDuration);
+            print("-- Back");
+            back.DOFade(1, fadeTime);
+            yield return new WaitForSeconds(fadeTime);
             back.blocksRaycasts = true;
         }
-
+        
     }
 
 }

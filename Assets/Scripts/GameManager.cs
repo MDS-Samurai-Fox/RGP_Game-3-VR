@@ -92,6 +92,8 @@ public class GameManager : MonoBehaviour {
     /// <returns></returns>
     IEnumerator EnableGameplay() {
         
+        print("-- Enabling gameplay");
+        
         GameObject.Find("Moa").GetComponent<RotationController> ().ShowCurrentCanvasSide(false);
 
         cgList[0].DOFade(0, 0.5f);

@@ -52,10 +52,36 @@ public class FadeController : MonoBehaviour {
 
         cg.DOFade(Convert.ToInt16(fadeIn), 1);
 
-        // yield return new WaitForSeconds(delay * 0.5f);
-
         cg.blocksRaycasts = fadeIn;
 
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public void FadeIn(float _fadeDuration) {
+        
+        cg.DOFade(1, _fadeDuration);
+        StartCoroutine(RaycastBlockAssign(_fadeDuration, true));
+        
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public void FadeOut(float _fadeDuration) {
+        
+        cg.DOFade(0, _fadeDuration);
+        StartCoroutine(RaycastBlockAssign(0, false));
+        
+    }
+    
+    IEnumerator RaycastBlockAssign(float _delay, bool _shouldBlockRaycast) {
+        
+        yield return new WaitForSeconds(_delay);
+        
+        cg.blocksRaycasts = _shouldBlockRaycast;
+        
     }
 
 }

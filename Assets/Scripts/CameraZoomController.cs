@@ -2,10 +2,14 @@
 using DG.Tweening;
 using UnityEngine;
 using TMPro;
+// using UnityEngine.UI;
 
 public class CameraZoomController : MonoBehaviour {
 	
 	public GameManager gameManager;
+    
+    [HeaderAttribute("Fade")]
+    public FadeController fadeImage;
 
     [HeaderAttribute("Animation")]
     public Ease zoomEaseType = Ease.OutSine;
@@ -45,6 +49,12 @@ public class CameraZoomController : MonoBehaviour {
 		
 		isTweening = true;
         
+        fadeImage.FadeIn(0.5f);
+        
+        yield return new WaitForSeconds(0.5f);
+        
+        zoomDuration = 0;
+        
 		// Move the camera towards the body part
         transform.DOMove(_bodypart.position + _bodypart.GetComponent<TweenOffset>().zoomPosition, zoomDuration).SetEase(zoomEaseType);
 		
@@ -71,6 +81,8 @@ public class CameraZoomController : MonoBehaviour {
 		// --
 		
 		yield return new WaitForSeconds(zoomDuration);
+        
+        fadeImage.FadeOut(0.5f);
 		
 		isTweening = false;
 		
