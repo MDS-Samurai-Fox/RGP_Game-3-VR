@@ -88,6 +88,8 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     IEnumerator EnableGameplay() {
+        
+        GameObject.Find("Moa").GetComponent<RotationController> ().ShowCurrentCanvasSide();
 
         cgList[0].DOFade(0, 0.5f);
         cgList[0].blocksRaycasts = false;
@@ -97,7 +99,6 @@ public class GameManager : MonoBehaviour {
         cgList[1].DOFade(1, 1);
         cgList[2].DOFade(1, 1);
 
-        // yield return new WaitForSeconds(0.9f);
         cgList[1].blocksRaycasts = true;
         cgList[2].blocksRaycasts = true;
 

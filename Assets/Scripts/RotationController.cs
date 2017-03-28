@@ -9,6 +9,9 @@ public class RotationController : MonoBehaviour {
 
     // Rotation
     [HideInInspector] public Vector3 originalRotation;
+    private Vector3 eulerAngles;
+    private float endAngle = 0;
+
     public Ease rotationEaseType = Ease.OutBounce;
     public float rotationDuration = 1;
     private bool canRotate = true;
@@ -19,7 +22,7 @@ public class RotationController : MonoBehaviour {
     /// Awake is called when the script instance is being loaded.
     /// </summary>
     void Awake() {
-        gameManager = FindObjectOfType<GameManager> ();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     /// <summary>
@@ -42,7 +45,7 @@ public class RotationController : MonoBehaviour {
             canRotate = false;
         }
 
-        Vector3 eulerAngles = transform.transform.eulerAngles;
+        eulerAngles = transform.transform.eulerAngles;
 
         if (shouldRotateRight) {
             gameManager.PlaySound(gameManager.arrow_right);
@@ -51,6 +54,8 @@ public class RotationController : MonoBehaviour {
             gameManager.PlaySound(gameManager.arrow_left);
             eulerAngles.y += 90;
         }
+
+        endAngle = eulerAngles.y;
 
         transform.DORotate(eulerAngles, rotationDuration).SetEase(rotationEaseType).OnComplete(ResetRotationState);
 
@@ -68,6 +73,50 @@ public class RotationController : MonoBehaviour {
 
     public void ResetRotation() {
         transform.DORotate(originalRotation, 0);
+    }
+
+    /// <summary>
+    /// Shows the respective canvas according to the rotation of the moa (Makes everything look cleaner)
+    /// </summary>
+    public void ShowCurrentCanvasSide() {
+        
+        // Find the moa canvas
+        Transform moaCanvas = GameObject.Find("Moa").transform.FindChild("Moa Canvas");
+
+        CanvasGroup front = moaCanvas.FindChild("Side - Front").GetComponent<CanvasGroup>();
+        CanvasGroup left = moaCanvas.FindChild("Side - Left").GetComponent<CanvasGroup>();
+        CanvasGroup right = moaCanvas.FindChild("Side - Right").GetComponent<CanvasGroup>();
+        CanvasGroup back = moaCanvas.FindChild("Side - Back").GetComponent<CanvasGroup>();
+
+        // Fade all the canvases out
+        front.DOFade(0, 0.5f); front.blocksRaycasts = false;
+        left.DOFade(0, 0.5f); left.blocksRaycasts = false;
+        right.DOFade(0, 0.5f); right.blocksRaycasts = false;
+        back.DOFade(0, 0.5f); back.blocksRaycasts = false;
+        
+        // Depending on the angle, fade the current side in
+        // Front
+        if (endAngle == 0) {
+            front.DOFade(1, 0.5f);
+            front.blocksRaycasts = true;
+        }
+        // Right
+        else if (endAngle == 90) {
+            right.DOFade(1, 0.5f);
+            right.blocksRaycasts = true;
+            
+        }
+        // Left
+        else if (endAngle == -90) {
+            left.DOFade(1, 0.5f);
+            left.blocksRaycasts = true;
+        }
+        // Back
+        else if (endAngle == 180) {
+            back.DOFade(1, 0.5f);
+            back.blocksRaycasts = true;
+        }
+
     }
 
 }
