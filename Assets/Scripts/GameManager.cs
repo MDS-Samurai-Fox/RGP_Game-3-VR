@@ -37,7 +37,10 @@ public class GameManager : MonoBehaviour {
     /// any of the Update methods is called the first time.
     /// </summary>
     void Start() {
-
+        
+        intro.gameObject.SetActive(true);
+        modelViewCanvas.gameObject.SetActive(true);
+        
         cgList.Add(intro);
         cgList.Add(moaCanvas);
         cgList.Add(screenViewCanvas);
@@ -89,7 +92,7 @@ public class GameManager : MonoBehaviour {
     /// <returns></returns>
     IEnumerator EnableGameplay() {
         
-        GameObject.Find("Moa").GetComponent<RotationController> ().ShowCurrentCanvasSide();
+        GameObject.Find("Moa").GetComponent<RotationController> ().ShowCurrentCanvasSide(false);
 
         cgList[0].DOFade(0, 0.5f);
         cgList[0].blocksRaycasts = false;
