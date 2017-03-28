@@ -99,10 +99,12 @@ public class ZoomController : MonoBehaviour {
         // Change the text
         gameManager.textLeft.text = texts[0].text;
         gameManager.textRight.text = texts[1].text;
-
+        
+        // Show the model view canvas
         gameManager.modelViewCanvas.DOFade(1, fadeDuration * 2).SetDelay(tweenDuration - fadeDuration);
         gameManager.modelViewCanvas.blocksRaycasts = true;
-
+        
+        // Hide the moa and screen view canvas
         gameManager.moaCanvas.DOFade(0, fadeDuration);
         gameManager.moaCanvas.blocksRaycasts = false;
 

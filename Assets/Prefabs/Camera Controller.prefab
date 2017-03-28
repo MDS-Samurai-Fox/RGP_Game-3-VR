@@ -99,6 +99,7 @@ GameObject:
   - 4: {fileID: 4000011865603394}
   - 143: {fileID: 143000011094628738}
   - 114: {fileID: 114000012941779494}
+  - 114: {fileID: 114000012941409232}
   m_Layer: 11
   m_Name: Camera Controller
   m_TagString: Untagged
@@ -415,15 +416,31 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013896523982}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8e7ff1cdf4c4e74db00c3684108bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1056
   sortOrder: 20
+--- !u!114 &114000012941409232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012640904944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62263e46aa104e04a850d2efba0498c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  zoomEaseType: 12
+  zoomDuration: 1
+  fadeDuration: 0.3
+  tweenOffset: {x: 0.1, y: -0.3, z: -0.5}
 --- !u!114 &114000012941779494
 MonoBehaviour:
   m_ObjectHideFlags: 1

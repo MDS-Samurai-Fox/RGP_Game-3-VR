@@ -29,11 +29,14 @@ Properties {
 }
 
 Category {
-	Tags { "Queue"="Transparent+10" "IgnoreProjector"="True" "RenderType"="Transparent" }
+	Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" }
 	Blend SrcAlpha OneMinusSrcAlpha
 	AlphaTest Greater .01
 	ColorMask RGB
-	Cull Off Lighting Off ZWrite Off ZTest Off
+	Cull Off 
+	Lighting Off 
+	ZWrite Off 
+	ZTest Off
 
 	SubShader {
 		Pass {

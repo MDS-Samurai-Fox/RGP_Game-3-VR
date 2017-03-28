@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour {
+    
+    public CameraZoomController cameraZoomController;
 
     [HeaderAttribute("Text")]
     public TextMeshProUGUI textLeft;
@@ -66,7 +68,6 @@ public class GameManager : MonoBehaviour {
             cgList[i].blocksRaycasts = false;
         }
 
-        // cgList[0].DOFade(1, 1);
         cgList[0].alpha = 1;
         cgList[0].blocksRaycasts = true;
 
@@ -106,6 +107,8 @@ public class GameManager : MonoBehaviour {
     /// Resets the game
     /// </summary>
     public void Reset() {
+        
+        cameraZoomController.ResetPosition();
 
         // Find all the existing zoom managers
         ZoomController[] phList = FindObjectsOfType<ZoomController> ();
@@ -113,11 +116,11 @@ public class GameManager : MonoBehaviour {
         // Reset the moa
         GameObject.Find("Moa").GetComponent<RotationController> ().ResetRotation();
 
-        // Reset the body parts
-        foreach(ZoomController ph in phList) {
-            ph.rotationController.ResetRotation();
-            ph.ResetPosition();
-        }
+        // // Reset the body parts
+        // foreach(ZoomController ph in phList) {
+        //     ph.rotationController.ResetRotation();
+        //     ph.ResetPosition();
+        // }
 
         OnlyShowTutorialCanvas();
 
